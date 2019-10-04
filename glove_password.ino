@@ -19,6 +19,7 @@ int i;
 int j;
 int correct = 1;
 int check = 0;
+int num = 0;
 /*0 MEANS NOT BENT AND 1 MEANS BENT*/
 int positions[10][5] = {{0, 1, 1, 1, 1},   /*0*/   
                        {0, 0, 1, 1, 1},   /*1*/
@@ -31,6 +32,7 @@ int positions[10][5] = {{0, 1, 1, 1, 1},   /*0*/
                        {1, 0, 1, 0, 0},   /*8*/
                        {1, 1, 0, 0, 0}};   /*9*/
 char words[10] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
+char password[4] = {'5', '1', '5', '1'};
 float angle_1;
 float angle_2;
 float angle_3;
@@ -43,7 +45,7 @@ void setup() {
   pinMode(flex_3, INPUT);
   pinMode(flex_4, INPUT);
   pinMode(flex_5, INPUT);
-
+  delay(2000);
 }
 int pos(int a)
 {
@@ -92,41 +94,57 @@ void loop() {
   hand[3] = pos_4;
   pos_5 = pos(val_5);
   hand[4] = pos_5;
-  delay(2000);
-  Serial.println("Reading first digit...");
-  if (findnum(hand) == '5')
-  {
-    check ++;
+  if (num == 0){
+    Serial.println("Reading first digit...");
+    if (findnum(hand) == password[0])
+    {
+      check ++;
+    }
+    Serial.println(findnum(hand));
+    num++;
+    delay(2000);
   }
-  Serial.println(findnum(hand));
-  delay(2000);
-  Serial.println("Reading second digit...");
-  if (findnum(hand) == '5')
-  {
-    check ++;
+  else if (num == 1){
+    Serial.println("Reading second digit...");
+    if (findnum(hand) == password[1])
+    {
+      check ++;
+    }
+    Serial.println(findnum(hand));
+    num++;
+    delay(2000);
   }
-  Serial.println(findnum(hand));
-  delay(2000);
-  Serial.println("Reading third digit...");
-  if (findnum(hand) == '5')
-  {
-    check ++;
+  else if (num == 2){
+    Serial.println("Reading third digit...");
+    if (findnum(hand) == password[2])
+    {
+      check ++;
+    }
+    Serial.println(findnum(hand));
+    num++;
+    delay(2000);
   }
-  Serial.println(findnum(hand));
-  delay(2000);
-  Serial.println("Reading fourth digit...");
-  if (findnum(hand) == '5')
-  {
-    check ++;
+  else if (num == 3){
+    Serial.println("Reading fourth digit...");
+    if (findnum(hand) == password[3])
+    {
+      check ++;
+    }
+    Serial.println(findnum(hand));
+    num++;
+    delay(2000);
   }
-  Serial.println(findnum(hand));
-  if (check == 4)
-  {
-    Serial.println("CORRECT PASSWORD!");
+  else if (num == 4){
+    if (check == 4)
+    {
+      Serial.println("CORRECT PASSWORD!");
+    }
+    else
+    {
+       Serial.println("PASSWORD IS INCORRECT!");
+    }
+    num = 0;
+    check = 0;
   }
-  else
-  {
-     Serial.println("PASSWORD IS INCORRECT!");
-  }
-  delay(500);
+
 }
